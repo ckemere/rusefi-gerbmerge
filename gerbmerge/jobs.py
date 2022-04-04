@@ -66,7 +66,7 @@ IgnoreList = ( \
   re.compile(r'^%OFA0B0\*%$'),
   re.compile(r'^%IPPOS\*%'),
   re.compile(r'^%AMOC8\*$'),                         # Eagle's octagon defined by macro with a $1 parameter
-  re.compile(r'^5,1,8,0,0,1\.08239X\$1,22\.5\*$'),   # Eagle's octagon, 22.5 degree rotation
+  re.compile(r'^5,1,8,0,0,1\.08239X\$1,22\.5\*[%]?$'),   # Eagle's octagon, 22.5 degree rotation
   re.compile(r'^5,1,8,0,0,1\.08239X\$1,0\.0\*$'),    # Eagle's octagon, 0.0 degree rotation
   re.compile(r'^\*?%$'),
   re.compile(r'^M0?2\*$'),
@@ -96,7 +96,9 @@ xtdef_pat = re.compile(r'^(T\d+)(?:F\d+)?(?:S\d+)?C([0-9.]+)$') # Tool+diameter 
                                                                 # feed/speed (for Protel)
 xtdef2_pat = re.compile(r'^(T\d+)C([0-9.]+)(?:F\d+)?(?:S\d+)?$') # Tool+diameter definition with optional
                                                                 # feed/speed at the end (for OrCAD)
-xzsup_pat = re.compile(r'^INCH(,([LT])Z)?$')      # Leading/trailing zeros INCLUDED
+xzsup_pat = re.compile(r'^INCH(,([LT])Z)?(,[0-9]+\.[0-9]+)?$')      # Leading/trailing zeros INCLUDED
+                                                                    # this now also specifies
+                                                                    # digit format. 
 
 XIgnoreList = ( \
   re.compile(r'^%$'),
@@ -104,6 +106,7 @@ XIgnoreList = ( \
   re.compile(r'^M48$'),   # Program header to first %
   re.compile(r'^M72$'),   # Inches
   re.compile(r'^FMAT,2$'),# KiCad work-around
+  re.compile(r'^ICI,OFF$'),# EAGLE work-around "Incremental mode off" - ON would be nonsupported
   re.compile(r'^G05$'),   # Drill Mode
   re.compile(r'^G90$')    # Absolute Mode
   )
