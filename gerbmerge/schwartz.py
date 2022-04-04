@@ -19,7 +19,7 @@ def schwartz(List, Metric):
     return (M(element), element)
 
   paired = list(map(pairing, List))
-  paired.sort()
+  paired.sort(key=lambda y: y[0])
   return list(map(stripit, paired))
 
 def stripit2(pair):
